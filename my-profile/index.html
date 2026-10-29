@@ -176,12 +176,64 @@ header .role-navigation{display:flex;visibility:visible}
 header .page-chooser{display:flex;visibility:visible}
 header #page-navigation{display:block;visibility:visible;min-width:145px}
 @media(max-width:650px){header .role-navigation{flex-direction:column;align-items:flex-end}header #page-navigation{width:145px}}
-.next-step{font-size:13px;font-weight:600;color:var(--accent);text-underline-offset:4px}</style>
+.next-step{font-size:13px;font-weight:600;color:var(--accent);text-underline-offset:4px}
+/* Compact page layout. */
+header{padding:14px 28px;min-height:64px}
+main{max-width:960px;margin:24px auto;padding:0 28px}
+body{line-height:1.5}
+h1,.intro h1{font-size:30px;letter-spacing:-.8px;max-width:none;margin:0 0 8px}
+h2{font-size:20px}
+.intro{margin-bottom:20px;padding-bottom:0;gap:12px}
+.intro>small.eyebrow,.intro>div>small,.intro>.row>small.eyebrow{display:none}
+.intro p{margin:6px 0 0;max-width:72ch}
+p{margin:6px 0 12px}
+.eyebrow{margin-bottom:6px}
+.section{padding:18px 0}
+.section>.eyebrow{display:none}
+label{margin-top:12px}
+.bucket{padding:16px;margin:14px 0}
+.bucket>p{margin-bottom:12px}
+.criterion{padding:12px 0}
+fieldset{margin:14px 0}
+.choice{padding:12px;margin:8px 0}
+.footer-actions{padding:16px 0}
+dialog{padding:20px}
+.preview-block,.detail-block,.detail-section{padding-top:14px;margin-top:14px}
+footer{padding-bottom:18px}
+@media(max-width:650px){
+header{padding:12px 16px;min-height:64px}
+main{padding:0 16px;margin-top:18px}
+h1,.intro h1{font-size:27px}
+.role-navigation{gap:6px}
+}
+
+.profile-overview{margin-top:0}
+.profile-overview .profile-summary{padding:12px 0 16px;margin-bottom:14px}
+.card,.profile-flow>.card,.skills-group>.card,.profile-overview>.card:last-child{padding-bottom:18px;margin-bottom:18px}
+.profile-flow{margin-top:16px}
+.workflow-guide{margin-bottom:14px;gap:9px}
+.skill-bucket{padding:18px;margin-bottom:18px}
+.bucket-heading .eyebrow{display:none}
+.bucket-description{margin:8px 0 14px}
+.skill-bucket .discovery{padding:14px;margin-bottom:14px}
+.profile-flow .skill,.skill-bucket .skill{padding:14px 0}
+.profile-flow .skill:first-child{padding-top:8px}
+.profile-flow .actions{margin-top:10px}
+.profile-flow .card>p.muted{margin-bottom:12px}
+.section-intro{margin:20px 0 14px}
+.section-intro .eyebrow{display:none}
+.section-intro>h2{font-size:20px}
+.bucket-footnote{margin-top:14px;padding-top:10px}
+.experience{padding-top:12px;margin-top:12px}
+#profile-details{margin-bottom:18px}
+@media(max-width:650px){.skill-bucket{padding:14px}.profile-flow{margin-top:14px}}
+
+</style>
 </head>
 <body>
 <header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker" selected>Job seeker</option><option value="hiring-manager">Hiring manager</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../my-profile/?nav=5" selected>My Profile</option><option value="../job-search/?nav=5">Job Search</option></select></div></nav></header>
 <main>
-<div class="intro"><div><small>MY PROFILE</small><h1>Make your experience count.</h1><p class="muted">Help employers see what you can do—even when your background looks different.</p></div></div>
+<div class="intro"><div><small>MY PROFILE</small><h1>My Profile</h1><p class="muted">Manage your profile, resume, skills, and experience.</p></div></div>
 
 <div id="status" class="status" role="status" aria-live="polite"></div>
 <div class="profile-overview" aria-label="Your profile"><section class="profile-summary" aria-label="Profile summary"><div><h2 id="summary-name"></h2><p id="summary-headline"></p><small id="summary-location"></small></div><button id="edit-profile-toggle" aria-expanded="false" aria-controls="profile-details">Edit profile</button></section>
@@ -200,7 +252,7 @@ header #page-navigation{display:block;visibility:visible;min-width:145px}
 <section class="skill-bucket" id="discovered-bucket" aria-labelledby="discovered-heading">
 <div class="bucket-heading"><div><small class="eyebrow">DISCOVER & REVIEW</small><h2 id="discovered-heading">Discovered skills</h2></div><span class="bucket-count" id="pending-count"></span></div>
 <p class="bucket-description">Skills your experience may demonstrate. Review each suggestion and add the ones that describe you to your profile.</p>
-<section class="discovery" aria-labelledby="discovery-heading"><small class="eyebrow">START WITH YOUR EXPERIENCE</small><h2 id="discovery-heading">Find abilities you may not have named yet.</h2><p class="muted">Describe a task, accomplishment, or problem you solved. Paid work, volunteering, school projects, and everyday responsibilities all count.</p>
+<section class="discovery" aria-labelledby="discovery-heading"><small class="eyebrow">START WITH YOUR EXPERIENCE</small><h2 id="discovery-heading">Find skills</h2><p class="muted">Describe a task, accomplishment, or problem you solved. Paid work, volunteering, school projects, and everyday responsibilities all count.</p>
 <label for="accomplishment">What did you do, and what changed because of it?</label><textarea id="accomplishment" maxlength="2000">I scheduled shifts for 12 coworkers and handled last-minute coverage. I also trained four new colleagues on our order and inventory procedures.</textarea>
 <div class="actions"><button class="primary" id="discover-skills" aria-controls="skill-results suggestions">Find my skills</button></div><div id="discovery-progress" class="discovery-progress" role="status" aria-live="polite" hidden><span class="thinking-dot" aria-hidden="true"></span><span id="progress-message">Looking at your experience…</span></div>
 
@@ -212,9 +264,9 @@ header #page-navigation{display:block;visibility:visible;min-width:145px}
 <div class="bucket-heading"><div><small class="eyebrow">YOUR PROFILE</small><h2 id="my-skills-heading">My skills <span id="my-skills-count" class="bucket-count"></span></h2></div><button id="add-skill">+ Add skill</button></div>
 <p class="bucket-description">Skills you have chosen to include in your profile, with the experience that supports them.</p>
 <div id="skill-moved" role="status" aria-live="polite" hidden></div>
-<div id="confirmed"></div><p class="bucket-footnote">Adding a skill confirms that it describes your ability. It does not mean the skill is independently verified.</p><div class="actions"><a class="next-step" href="../job-search/?nav=5">Explore jobs using your skills →</a></div>
+<div id="confirmed"></div><p class="bucket-footnote">Adding a skill confirms that it describes your ability. It does not mean the skill is independently verified.</p><div class="actions"><a class="next-step" href="../job-search/?nav=5">Search jobs →</a></div>
 </section>
-<div class="section-intro"><small class="eyebrow">03 / COMPLETE THE PICTURE</small><h2>Your experience and qualifications</h2><p class="muted">Skills add context to your background. Keep your work history, education, and credentials up to date.</p></div>
+<div class="section-intro"><small class="eyebrow">BACKGROUND</small><h2>Experience and qualifications</h2><p class="muted">Skills add context to your background. Keep your work history, education, and credentials up to date.</p></div>
 <section class="card"><div class="row"><h2>Experience</h2><button id="add-experience">+ Add experience</button></div><p class="muted">Work, projects, volunteering, and accomplishments.</p><div id="experiences"></div></section>
 <section class="card"><div class="row"><h2>Education & certifications</h2><button id="edit-qualifications">Edit qualifications</button></div><p class="qualification-text" id="qualification-text"></p><small>Self-reported qualifications</small></section>
 

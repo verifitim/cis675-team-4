@@ -19,9 +19,40 @@ header .role-navigation{display:flex;visibility:visible}
 header .page-chooser{display:flex;visibility:visible}
 header #page-navigation{display:block;visibility:visible;min-width:145px}
 @media(max-width:650px){header .role-navigation{flex-direction:column;align-items:flex-end}header #page-navigation{width:145px}}
+
+/* Compact page layout. */
+header{padding:14px 28px;min-height:64px}
+main{max-width:960px;margin:24px auto;padding:0 28px}
+body{line-height:1.5}
+h1,.intro h1{font-size:30px;letter-spacing:-.8px;max-width:none;margin:0 0 8px}
+h2{font-size:20px}
+.intro{margin-bottom:20px;padding-bottom:0;gap:12px}
+.intro>small.eyebrow,.intro>div>small,.intro>.row>small.eyebrow{display:none}
+.intro p{margin:6px 0 0;max-width:72ch}
+p{margin:6px 0 12px}
+.eyebrow{margin-bottom:6px}
+.section{padding:18px 0}
+.section>.eyebrow{display:none}
+label{margin-top:12px}
+.bucket{padding:16px;margin:14px 0}
+.bucket>p{margin-bottom:12px}
+.criterion{padding:12px 0}
+fieldset{margin:14px 0}
+.choice{padding:12px;margin:8px 0}
+.footer-actions{padding:16px 0}
+dialog{padding:20px}
+.preview-block,.detail-block,.detail-section{padding-top:14px;margin-top:14px}
+footer{padding-bottom:18px}
+@media(max-width:650px){
+header{padding:12px 16px;min-height:64px}
+main{padding:0 16px;margin-top:18px}
+h1,.intro h1{font-size:27px}
+.role-navigation{gap:6px}
+}
+
 </style></head><body>
 <header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager" selected>Hiring manager</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../job-posting/?nav=5" selected>Job Posting</option><option value="../candidate-matches/?nav=5">Candidate Matches</option></select></div></nav></header>
-<main><div class="intro"><div class="row"><small class="eyebrow">JOB POSTING</small><span class="badge" id="posting-state">Draft</span></div><h1>Define what success takes.</h1><p class="muted">Set the qualifications that matter, and decide how to recognize strong candidates—even when their backgrounds look different.</p></div>
+<main><div class="intro"><div class="row"><small class="eyebrow">JOB POSTING</small><span class="badge" id="posting-state">Draft</span></div><h1>Job Posting</h1><p class="muted">Enter job details, set qualifications, and choose an evaluation approach.</p></div>
 <form id="job-form">
 <section class="section"><small class="eyebrow">01 / THE ROLE</small><h2>Job details</h2><p>Give candidates a clear picture of the work and its purpose.</p>
 <label for="title">Job title</label><input id="title" required maxlength="120">
