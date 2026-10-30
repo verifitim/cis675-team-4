@@ -1,0 +1,198 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Candidate Records · Team 4</title><style>
+:root{--ink:#181b20;--muted:#687382;--line:#e0e5eb;--blue:#2459db}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:14px/1.65 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{max-width:1000px;margin:auto;padding:22px 40px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.brand{font-size:21px;font-weight:750;letter-spacing:-.7px}header small{color:var(--muted)}main{max-width:820px;margin:44px auto;padding:0 40px}h1{font-size:38px;line-height:1.2;letter-spacing:-1.4px;font-weight:650;margin:10px 0}h2{font-size:22px;letter-spacing:-.6px;margin:0;font-weight:650}h3{font-size:16px;margin:0;font-weight:650}p{margin:8px 0 20px}.muted,small{color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:.13em;font-weight:650;display:block;color:var(--muted);margin-bottom:9px}.intro{margin-bottom:32px}.intro .muted{max-width:58ch}.section{padding:28px 0;border-top:1px solid var(--line)}.section>p{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:block;font-size:12px;font-weight:600;margin:16px 0 6px}input,textarea,select{width:100%;padding:10px 11px;border:1px solid #d6dde6;border-radius:5px;background:#fff;font:inherit;color:var(--ink)}textarea{resize:vertical;min-height:110px}button{font:600 12px/1.5 ui-sans-serif,system-ui;cursor:pointer;background:#fff;border:1px solid #d6dde6;border-radius:5px;padding:9px 13px;color:#414b59}button:hover{background:#f3f6fa}button.primary{background:var(--ink);border-color:var(--ink);color:#fff}button.primary:hover{background:#343b46}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}.row{display:flex;align-items:center;justify-content:space-between;gap:14px}.bucket{border:1px solid var(--line);border-radius:7px;padding:22px;margin:20px 0}.bucket>p{font-size:12px;color:var(--muted);margin:6px 0 18px}.criterion{padding:16px 0;border-top:1px solid var(--line)}.criterion p{font-size:12px;color:var(--muted);margin:5px 0}.criterion small{font-size:10px;text-transform:uppercase;letter-spacing:.06em}.criterion .actions{margin-top:9px}.actions{display:flex;flex-wrap:wrap;gap:8px}.criterion button{padding:4px 8px;font-size:11px}.count{font-size:11px;color:var(--muted);margin-left:7px;font-weight:400}.empty{font-size:13px;color:var(--muted)}fieldset{padding:0;border:0;margin:20px 0}legend{font-size:12px;font-weight:600;margin-bottom:10px}.choice{display:block;border:1px solid var(--line);border-radius:6px;padding:16px;margin:10px 0;cursor:pointer;font-weight:400}.choice:has(input:checked){border-color:#8ca9e8;background:#f6f8fe}.choice input{width:auto;margin:0 9px 0 0;accent-color:var(--blue)}.choice strong{font-size:13px}.choice small{display:block;padding-left:25px;margin-top:4px;font-weight:400;font-size:12px}.explanation{padding:14px 16px;background:#f6f8fb;border-left:2px solid #aabfe9;border-radius:3px;font-size:12px;color:#4e6078}.footer-actions{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding:24px 0}.footer-actions small{font-size:11px}.status{font-size:12px;color:#2d674d;min-height:24px}.status:empty{display:none}.status:not(:empty){padding:12px 0}dialog{width:min(640px,92vw);max-height:88vh;overflow:auto;border:1px solid var(--line);border-radius:9px;padding:28px;box-shadow:0 20px 80px #10182825}dialog::backdrop{background:#18233560}dialog .actions{margin-top:20px}.preview-block{padding:18px 0;border-top:1px solid var(--line);margin-top:18px}.preview-block p{white-space:pre-wrap;font-size:13px}.preview-block ul{padding-left:20px;font-size:13px}.badge{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 8px}.field-note{font-size:11px;color:var(--muted);margin-top:6px}footer{font-size:10px;color:var(--muted);padding-bottom:26px}@media(max-width:600px){header{padding:18px 20px}main{padding:0 20px;margin-top:30px}.grid{grid-template-columns:1fr;gap:0}h1{font-size:32px}.bucket{padding:17px}.row{flex-wrap:wrap}.footer-actions{align-items:flex-start;flex-direction:column}}
+
+.persona-chooser{display:flex;align-items:center;gap:10px}
+.persona-chooser label{margin:0;font-size:11px;font-weight:500;color:var(--muted)}
+.persona-chooser select{width:auto;min-width:145px;padding:7px 28px 7px 10px;font:500 12px/1.5 ui-sans-serif,system-ui;color:var(--ink);border:1px solid var(--line);border-radius:5px;background-color:#fff;cursor:pointer}
+@media(max-width:480px){.persona-chooser{gap:6px}.persona-chooser label{font-size:10px}.persona-chooser select{min-width:130px;font-size:11px}}
+
+.role-navigation{display:flex;align-items:center;justify-content:flex-end;gap:20px}
+.page-chooser{display:flex;align-items:center;gap:10px}
+.page-chooser label{margin:0;font-size:11px;font-weight:500;color:var(--muted)}
+.page-chooser select{width:auto;min-width:130px;padding:7px 28px 7px 10px;font:500 12px/1.5 ui-sans-serif,system-ui;color:var(--ink);border:1px solid var(--line);border-radius:5px;background-color:white;cursor:pointer}
+@media(max-width:650px){header{align-items:flex-start;gap:16px}.role-navigation{flex-direction:column;align-items:flex-end;gap:8px}.persona-chooser,.page-chooser{gap:8px}.persona-chooser select,.page-chooser select{width:145px;font-size:11px;min-width:0}.persona-chooser label,.page-chooser label{font-size:11px}}
+header{height:auto;min-height:76px}@media(max-width:650px){header{min-height:65px}}
+/* Both persona home pages always expose the same role and page controls. */
+header .role-navigation{display:flex;visibility:visible}
+header .page-chooser{display:flex;visibility:visible}
+header #page-navigation{display:block;visibility:visible;min-width:145px}
+@media(max-width:650px){header .role-navigation{flex-direction:column;align-items:flex-end}header #page-navigation{width:145px}}
+
+/* Compact page layout. */
+header{padding:14px 28px;min-height:64px}
+main{max-width:960px;margin:24px auto;padding:0 28px}
+body{line-height:1.5}
+h1,.intro h1{font-size:30px;letter-spacing:-.8px;max-width:none;margin:0 0 8px}
+h2{font-size:20px}
+.intro{margin-bottom:20px;padding-bottom:0;gap:12px}
+.intro>small.eyebrow,.intro>div>small,.intro>.row>small.eyebrow{display:none}
+.intro p{margin:6px 0 0;max-width:72ch}
+p{margin:6px 0 12px}
+.eyebrow{margin-bottom:6px}
+.section{padding:18px 0}
+.section>.eyebrow{display:none}
+label{margin-top:12px}
+.bucket{padding:16px;margin:14px 0}
+.bucket>p{margin-bottom:12px}
+.criterion{padding:12px 0}
+fieldset{margin:14px 0}
+.choice{padding:12px;margin:8px 0}
+.footer-actions{padding:16px 0}
+dialog{padding:20px}
+.preview-block,.detail-block,.detail-section{padding-top:14px;margin-top:14px}
+footer{padding-bottom:18px}
+@media(max-width:650px){
+header{padding:12px 16px;min-height:64px}
+main{padding:0 16px;margin-top:18px}
+h1,.intro h1{font-size:27px}
+.role-navigation{gap:6px}
+}
+
+
+.records-toolbar{border:1px solid var(--line);border-radius:7px;padding:16px;margin:18px 0}
+.records-toolbar p{margin:0 0 10px}.records-toolbar .actions{align-items:center;justify-content:space-between}
+.toggle-all{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400;margin:0}
+.toggle-all input{width:auto;margin:0;accent-color:var(--blue)}
+.records-heading{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.record-card{padding:16px 0;border-bottom:1px solid var(--line)}.record-card h3{font-size:18px}
+.record-card>.muted{font-size:13px;margin:4px 0 8px}.contact p{font-size:13px;margin:3px 0;overflow-wrap:anywhere}.contact small{font-size:11px}
+.retained{color:#316048;background:#edf5ef}.duplicate{color:#826534;background:#fbf4e7}
+.duplicate-group{padding:16px 0;border-top:1px solid var(--line);margin-top:16px}.duplicate-group>h3{margin-bottom:12px}
+.retained-record,.hidden-record{padding:12px;border:1px solid var(--line);border-radius:5px;margin:10px 0}
+.retained-record{border-left:3px solid #739a7c}.hidden-record{border-left:3px solid #baa06a}
+.match-evidence{background:#f6f8fb;padding:12px;border-radius:5px;font-size:12px;overflow-wrap:anywhere}.match-evidence p{margin:6px 0}
+button:disabled{opacity:.6;cursor:default}
+@media(max-width:600px){.records-toolbar .actions{align-items:flex-start;flex-direction:column}.record-card .row{align-items:flex-start}}
+</style></head><body><header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager">Hiring manager</option><option value="recruiter" selected>Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../candidate-records/?nav=5" selected>Candidate Records</option></select></div></nav></header>
+
+
+<main><div class="intro"><h1>Candidate Records</h1><p class="muted">Review candidate profiles with duplicate records excluded from the active list.</p></div>
+<div class="records-toolbar"><p id="cleanup-status" role="status" aria-live="polite"></p><div class="actions"><button type="button" id="review-duplicates">Review duplicates</button><label class="toggle-all"><input type="checkbox" id="show-all">Show all records</label></div></div>
+<p class="field-note">Records match when they share an email address or phone number. Email matching ignores capitalization and spaces; phone matching ignores formatting. Names alone do not trigger a match. The earliest record is retained.</p>
+<div id="storage-status" class="status" role="status" aria-live="polite"></div>
+<div class="row records-heading"><h2>Candidates</h2><span id="record-count" class="count" role="status" aria-live="polite"></span></div>
+<div id="candidate-records"></div><footer style="margin-top:18px">Team 4</footer></main>
+<dialog id="duplicate-review" aria-labelledby="duplicate-review-heading"><h2 id="duplicate-review-heading">Duplicate records</h2><p class="muted">Review the retained and hidden records, and the identifiers that matched.</p><div id="duplicate-groups"></div><div class="actions"><button type="button" id="close-review">Back to candidates</button></div></dialog>
+<script>'use strict';
+// Add each new persona page to this navigation map on both pages.
+const personaPages={
+'job-seeker':[{label:'My Profile',href:'../my-profile/?nav=5'},{label:'Job Search',href:'../job-search/?nav=5'}],
+'hiring-manager':[{label:'Job Posting',href:'../job-posting/?nav=5'},{label:'Candidate Matches',href:'../candidate-matches/?nav=5'},{label:'Screening Setup',href:'../screening-setup/?nav=5'}],
+'recruiter':[{label:'Candidate Records',href:'../candidate-records/?nav=5'}]
+};
+const personaSelect=document.getElementById('persona');
+const pageSelect=document.getElementById('page-navigation');
+function populatePages(role){
+pageSelect.replaceChildren();
+for(const page of personaPages[role]||[]){
+const option=document.createElement('option');option.value=page.href;option.textContent=page.label;
+option.selected=new URL(page.href,window.location.href).pathname===window.location.pathname;
+pageSelect.append(option);
+}
+}
+populatePages(personaSelect.value);
+personaSelect.addEventListener('change',event=>{
+const pages=personaPages[event.target.value];
+populatePages(event.target.value);
+if(pages&&pages.length)window.location.assign(pages[0].href);
+});
+pageSelect.addEventListener('change',event=>{
+const pages=personaPages[personaSelect.value]||[];
+if(pages.some(page=>page.href===event.target.value))window.location.assign(event.target.value);
+});
+// Restore the page's actual role if the browser restores select values on Back.
+window.addEventListener('pageshow',()=>{
+personaSelect.value='recruiter';
+populatePages(personaSelect.value);
+});
+
+
+const normalizeEmail=value=>String(value||'').replace(/\s+/g,'').toLowerCase();
+const normalizePhone=value=>String(value||'').replace(/\D/g,'');
+function detectDuplicates(records){
+ const parent=records.map((_,i)=>i);
+ function root(i){while(parent[i]!==i){parent[i]=parent[parent[i]];i=parent[i];}return i;}
+ const matches=[];
+ for(let i=0;i<records.length;i++)for(let j=i+1;j<records.length;j++){
+  const email=normalizeEmail(records[i].email),phone=normalizePhone(records[i].phone);
+  const reasons=[];
+  if(email&&email===normalizeEmail(records[j].email))reasons.push({type:'Email',value:email});
+  if(phone&&phone===normalizePhone(records[j].phone))reasons.push({type:'Phone',value:phone});
+  if(reasons.length){parent[root(j)]=root(i);matches.push({a:i,b:j,reasons});}
+ }
+ const grouped=new Map();
+ records.forEach((_,i)=>{const r=root(i);if(!grouped.has(r))grouped.set(r,[]);grouped.get(r).push(i);});
+ const groups=[...grouped.values()].map(indices=>{
+  indices.sort((a,b)=>records[a].created.localeCompare(records[b].created)||a-b);
+  return {kept:indices[0],duplicates:indices.slice(1),matches:matches.filter(m=>indices.includes(m.a)&&indices.includes(m.b))};
+ });
+ const hidden=new Set(groups.flatMap(g=>g.duplicates));
+ return {groups,hidden};
+}
+
+const $=id=>document.getElementById(id);
+const storageKey='team4-candidate-records-v1';
+const initialRecords=[
+{id:'C001',name:'Alex Morgan',title:'Retail Shift Lead',email:'alex.morgan@example.com',phone:'(202) 555-0101',created:'2026-10-19T09:00:00Z'},
+{id:'C002',name:'Alex Morgan',title:'Retail Shift Lead',email:' ALEX.MORGAN@EXAMPLE.COM ',phone:'202-555-0102',created:'2026-10-20T09:00:00Z'},
+{id:'C003',name:'Jamie Chen',title:'Operations Specialist',email:'jamie.chen@example.com',phone:'(202) 555-0103',created:'2026-10-19T10:00:00Z'},
+{id:'C004',name:'Jamie Chen',title:'Operations Specialist',email:'jamie.c@example.com',phone:'202 555 0103',created:'2026-10-21T09:00:00Z'},
+{id:'C005',name:'Riley Patel',title:'Customer Support Trainer',email:'riley.patel@example.com',phone:'202-555-0104',created:'2026-10-19T11:00:00Z'},
+{id:'C006',name:'Taylor Brooks',title:'Volunteer Program Coordinator',email:'taylor.brooks@example.com',phone:'202-555-0105',created:'2026-10-19T12:00:00Z'}
+];
+let records=structuredClone(initialRecords);
+try{
+const saved=JSON.parse(localStorage.getItem(storageKey));
+if(saved&&Array.isArray(saved.records)&&saved.records.length&&saved.records.every(r=>typeof r.id==='string'&&typeof r.name==='string'&&typeof r.created==='string'))records=saved.records;
+}catch(e){}
+const result=detectDuplicates(records);
+try{localStorage.setItem(storageKey,JSON.stringify({records,hiddenIds:[...result.hidden].map(i=>records[i].id)}));}
+catch(e){$('storage-status').textContent='Records could not be saved in this browser. Duplicate detection is still available for this visit.';}
+function node(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;}
+function contact(record){
+const box=node('div',undefined,'contact');
+box.append(node('p','Email: '+String(record.email||'Not provided').trim()),node('p','Phone: '+(record.phone||'Not provided')),node('small','Record '+record.id+' · Added '+new Date(record.created).toLocaleDateString()));
+return box;
+}
+function render(){
+const showAll=$('show-all').checked;
+const visible=records.map((record,index)=>({record,index})).filter(item=>showAll||!result.hidden.has(item.index));
+$('record-count').textContent=showAll?records.length+' records shown':visible.length+' candidates shown';
+$('cleanup-status').textContent=result.hidden.size+' duplicate record'+(result.hidden.size===1?'':'s')+(showAll?' identified.':' hidden.');
+$('review-duplicates').disabled=!result.hidden.size;
+$('candidate-records').replaceChildren();
+visible.forEach(({record,index})=>{
+ const card=node('article',undefined,'record-card');
+ const row=node('div',undefined,'row');row.append(node('h3',record.name));
+ const hidden=result.hidden.has(index),group=result.groups.find(g=>g.kept===index);
+ if(hidden)row.append(node('span','Duplicate','badge duplicate'));
+ else if(group.duplicates.length)row.append(node('span','Retained record','badge retained'));
+ card.append(row,node('p',record.title,'muted'),contact(record));
+ if(hidden){const group=result.groups.find(g=>g.duplicates.includes(index));card.append(node('p','Excluded from the active list. Retained record: '+records[group.kept].id+'.','field-note'));}
+ $('candidate-records').append(card);
+});
+}
+function review(){
+$('duplicate-groups').replaceChildren();
+result.groups.filter(g=>g.duplicates.length).forEach((group,index)=>{
+ const section=node('section',undefined,'duplicate-group');
+ section.append(node('h3','Duplicate group '+(index+1)));
+ const kept=records[group.kept];
+ const retained=node('div',undefined,'retained-record');
+ retained.append(node('strong','Retained: '+kept.name+' · '+kept.id),contact(kept));section.append(retained);
+ group.duplicates.forEach(i=>{
+ const record=records[i];const duplicate=node('div',undefined,'hidden-record');
+ duplicate.append(node('strong','Hidden: '+record.name+' · '+record.id),contact(record));section.append(duplicate);
+ });
+ const evidence=node('div',undefined,'match-evidence');evidence.append(node('strong','Matching identifiers'));
+ group.matches.forEach(match=>match.reasons.forEach(reason=>evidence.append(node('p',reason.type+' match: '+reason.value+' ('+records[match.a].id+' and '+records[match.b].id+')'))));
+ section.append(evidence,node('p','The earliest record is retained. Later matches are excluded from the active list; their details remain available here.','field-note'));
+ $('duplicate-groups').append(section);
+});
+$('duplicate-review').showModal();
+}
+$('show-all').onchange=render;
+$('review-duplicates').onclick=review;
+$('close-review').onclick=()=>$('duplicate-review').close();
+render();
+</script></body></html>
