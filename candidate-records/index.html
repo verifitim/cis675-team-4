@@ -63,10 +63,26 @@ h1,.intro h1{font-size:27px}
 .match-evidence{background:#f6f8fb;padding:12px;border-radius:5px;font-size:12px;overflow-wrap:anywhere}.match-evidence p{margin:6px 0}
 button:disabled{opacity:.6;cursor:default}
 @media(max-width:600px){.records-toolbar .actions{align-items:flex-start;flex-direction:column}.record-card .row{align-items:flex-start}}
+
+.candidate-search{border:1px solid var(--line);border-radius:7px;padding:16px;margin:18px 0}
+.candidate-search label{margin-top:0}.candidate-search .actions{margin-top:12px}
+.candidate-search .field-note{margin:8px 0 0}
+.search-match-box{background:#eef4ff;border:1px solid #b8cdef;border-left:4px solid #2459db;border-radius:5px;padding:14px 16px;margin:12px 0;color:#263f63;overflow-wrap:anywhere}
+.search-match-box h4{font-size:14px;margin:0 0 9px;font-weight:750;color:#194780}
+.search-match-box p{font-size:13px;margin:7px 0;line-height:1.6}
+.search-match-box mark{background:#ffe594;color:#382b00;font-weight:750;padding:1px 2px;border-radius:2px}
+.candidate-background{font-size:13px;color:#536174;margin:12px 0}.candidate-background p{margin:6px 0;overflow-wrap:anywhere}
+.no-candidates{padding:20px 0;font-size:14px;color:#536174}
+@media(max-width:600px){.search-match-box{padding:12px}.candidate-search{padding:14px}}
 </style></head><body><header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager">Hiring manager</option><option value="recruiter" selected>Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../candidate-records/?nav=5" selected>Candidate Records</option></select></div></nav></header>
 
 
-<main><div class="intro"><h1>Candidate Records</h1><p class="muted">Review candidate profiles with duplicate records excluded from the active list.</p></div>
+<main><div class="intro"><h1>Candidate Records</h1><p class="muted">Search candidate skills, certifications, and experience. Duplicate records are excluded by default.</p></div>
+<form id="candidate-search" class="candidate-search" role="search" aria-label="Search candidate records">
+<label for="candidate-query">Search skills, certifications, experience, or keywords</label>
+<input type="search" id="candidate-query" maxlength="200" placeholder="Try training, spreadsheet, or safety certificate" aria-describedby="search-help">
+<p id="search-help" class="field-note">Enter one word or a short phrase. Each word must appear somewhere in the candidate’s name, role, skills, certifications, experience, or profile.</p>
+<div class="actions"><button type="submit" class="primary">Search candidates</button><button type="button" id="clear-search">Clear search</button></div></form>
 <div class="records-toolbar"><p id="cleanup-status" role="status" aria-live="polite"></p><div class="actions"><button type="button" id="review-duplicates">Review duplicates</button><label class="toggle-all"><input type="checkbox" id="show-all">Show all records</label></div></div>
 <p class="field-note">Records match when they share an email address or phone number. Email matching ignores capitalization and spaces; phone matching ignores formatting. Names alone do not trigger a match. The earliest record is retained.</p>
 <div id="storage-status" class="status" role="status" aria-live="polite"></div>
@@ -145,6 +161,44 @@ try{
 const saved=JSON.parse(localStorage.getItem(storageKey));
 if(saved&&Array.isArray(saved.records)&&saved.records.length&&saved.records.every(r=>typeof r.id==='string'&&typeof r.name==='string'&&typeof r.created==='string'))records=saved.records;
 }catch(e){}
+
+const candidateDetails={
+C001:{skills:['Team coordination','Training and onboarding','Spreadsheet tracking','Process improvement'],certifications:['Workplace Safety Certificate'],experience:'Three years as a retail shift lead. Coordinated schedules for 12 colleagues, delivered training for four new colleagues, and built a spreadsheet tracker that reduced missed orders by 25%.',profile:'Interested in operations, team coordination, and training roles. Also organized community donation events.'},
+C003:{skills:['Operations coordination','Inventory reporting','Excel','Spreadsheet tracking'],certifications:[],experience:'Four years coordinating order fulfillment and inventory reporting. Managed coverage for an 18-person team and maintained Excel spreadsheet reports.',profile:'Operations specialist with a business administration degree and experience improving order workflows.'},
+C005:{skills:['Customer communication','Training and onboarding','Process improvement'],certifications:['Customer Service Professional Certificate'],experience:'Five years supporting customers and delivering training for new colleagues. Wrote support instructions and resolved escalated customer questions.',profile:'Customer support trainer interested in customer onboarding and employee learning.'},
+C006:{skills:['Event planning','Volunteer coordination','Community outreach'],certifications:['First Aid Certificate'],experience:'Two years organizing community events, coordinating volunteers, and tracking program schedules and attendance.',profile:'Volunteer program coordinator with experience supporting local partnerships and community programs.'}
+};
+candidateDetails.C002=candidateDetails.C001;
+candidateDetails.C004=candidateDetails.C003;
+// Enrich existing browser-local US8 records without replacing their identity or contact details.
+records=records.map(record=>{
+ const detail=candidateDetails[record.id]||{skills:[],certifications:[],experience:'',profile:''};
+ return {...record,skills:Array.isArray(record.skills)?record.skills:[...detail.skills],certifications:Array.isArray(record.certifications)?record.certifications:[...detail.certifications],experience:typeof record.experience==='string'?record.experience:detail.experience,profile:typeof record.profile==='string'?record.profile:detail.profile};
+});
+let activeQuery='';
+
+
+function searchFields(record){
+return [
+{label:'Name',text:String(record.name||'')},
+{label:'Role',text:String(record.title||'')},
+{label:'Skills',text:Array.isArray(record.skills)?record.skills.join(', '):''},
+{label:'Certifications',text:Array.isArray(record.certifications)?record.certifications.join(', '):''},
+{label:'Experience',text:String(record.experience||'')},
+{label:'Profile',text:String(record.profile||'')}
+].filter(field=>field.text);
+}
+function searchTerms(query){return [...new Set(query.trim().toLowerCase().split(/\s+/).filter(Boolean))];}
+function matchesSearch(record,terms){const text=searchFields(record).map(field=>field.text.toLowerCase()).join(' ');return terms.every(term=>text.includes(term));}
+function matchingFields(record,terms){return searchFields(record).filter(field=>terms.some(term=>field.text.toLowerCase().includes(term)));}
+function highlightRanges(text,terms){
+const lower=text.toLowerCase(),ranges=[];
+for(const term of terms){if(!term)continue;let start=0,index;while((index=lower.indexOf(term,start))!==-1){ranges.push([index,index+term.length]);start=index+term.length;}}
+ranges.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const merged=[];
+for(const range of ranges){const last=merged[merged.length-1];if(last&&range[0]<=last[1])last[1]=Math.max(last[1],range[1]);else merged.push([...range]);}
+return merged;
+}
+
 const result=detectDuplicates(records);
 try{localStorage.setItem(storageKey,JSON.stringify({records,hiddenIds:[...result.hidden].map(i=>records[i].id)}));}
 catch(e){$('storage-status').textContent='Records could not be saved in this browser. Duplicate detection is still available for this visit.';}
@@ -154,10 +208,33 @@ const box=node('div',undefined,'contact');
 box.append(node('p','Email: '+String(record.email||'Not provided').trim()),node('p','Phone: '+(record.phone||'Not provided')),node('small','Record '+record.id+' · Added '+new Date(record.created).toLocaleDateString()));
 return box;
 }
+
+function highlightedText(text,terms){
+const fragment=document.createDocumentFragment();let position=0;
+for(const [start,end] of highlightRanges(text,terms)){
+if(start>position)fragment.append(document.createTextNode(text.slice(position,start)));
+fragment.append(node('mark',text.slice(start,end)));position=end;
+}
+if(position<text.length)fragment.append(document.createTextNode(text.slice(position)));
+return fragment;
+}
+function searchEvidence(record,terms){
+const box=node('section',undefined,'search-match-box');box.setAttribute('aria-label','Matches your search for '+record.name);
+box.append(node('h4','Matches your search'));
+matchingFields(record,terms).forEach(field=>{
+const line=node('p');line.append(node('strong',field.label+': '),highlightedText(field.text,terms));box.append(line);
+});return box;
+}
+function background(record){
+const box=node('div',undefined,'candidate-background');
+for(const field of searchFields(record).filter(field=>!['Name','Role'].includes(field.label))){const p=node('p');p.append(node('strong',field.label+': '),document.createTextNode(field.text));box.append(p);}
+return box;
+}
 function render(){
 const showAll=$('show-all').checked;
-const visible=records.map((record,index)=>({record,index})).filter(item=>showAll||!result.hidden.has(item.index));
-$('record-count').textContent=showAll?records.length+' records shown':visible.length+' candidates shown';
+const terms=searchTerms(activeQuery);
+const visible=records.map((record,index)=>({record,index})).filter(item=>(showAll||!result.hidden.has(item.index))&&matchesSearch(item.record,terms));
+$('record-count').textContent=visible.length+(showAll?(visible.length===1?' record':' records'):(visible.length===1?' candidate':' candidates'))+(terms.length?' matching “'+activeQuery+'”':' shown');
 $('cleanup-status').textContent=result.hidden.size+' duplicate record'+(result.hidden.size===1?'':'s')+(showAll?' identified.':' hidden.');
 $('review-duplicates').disabled=!result.hidden.size;
 $('candidate-records').replaceChildren();
@@ -167,10 +244,13 @@ visible.forEach(({record,index})=>{
  const hidden=result.hidden.has(index),group=result.groups.find(g=>g.kept===index);
  if(hidden)row.append(node('span','Duplicate','badge duplicate'));
  else if(group.duplicates.length)row.append(node('span','Retained record','badge retained'));
- card.append(row,node('p',record.title,'muted'),contact(record));
+ card.append(row,node('p',record.title,'muted'));
+ if(terms.length)card.append(searchEvidence(record,terms));
+ card.append(background(record),contact(record));
  if(hidden){const group=result.groups.find(g=>g.duplicates.includes(index));card.append(node('p','Excluded from the active list. Retained record: '+records[group.kept].id+'.','field-note'));}
  $('candidate-records').append(card);
 });
+if(!visible.length){const empty=node('div',undefined,'no-candidates');empty.append(node('strong','No candidates found.'),node('p','Try another skill, certification, experience, or keyword, or clear the search.'));$('candidate-records').append(empty);}
 }
 function review(){
 $('duplicate-groups').replaceChildren();
@@ -191,6 +271,9 @@ result.groups.filter(g=>g.duplicates.length).forEach((group,index)=>{
 });
 $('duplicate-review').showModal();
 }
+$('candidate-search').onsubmit=event=>{event.preventDefault();activeQuery=$('candidate-query').value.trim();render();};
+$('clear-search').onclick=()=>{activeQuery='';$('candidate-query').value='';render();$('candidate-query').focus();};
+$('candidate-query').addEventListener('search',()=>{if(!$('candidate-query').value){activeQuery='';render();}});
 $('show-all').onchange=render;
 $('review-duplicates').onclick=review;
 $('close-review').onclick=()=>$('duplicate-review').close();
