@@ -63,7 +63,7 @@ h1,.intro h1{font-size:27px}
 #approval-details{font-size:12px;color:var(--muted)}.custom-entry textarea{min-height:76px}
 button:disabled{opacity:.6;cursor:default}
 @media(max-width:600px){.sample-grid{grid-template-columns:1fr}.question-card{padding:12px}}
-</style></head><body><header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager" selected>Hiring manager</option><option value="recruiter">Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../job-posting/?nav=5">Job Posting</option><option value="../candidate-matches/?nav=5">Candidate Matches</option><option value="../screening-setup/?nav=5" selected>Screening Setup</option></select></div></nav></header>
+</style></head><body><header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager" selected>Hiring manager</option><option value="recruiter">Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../job-posting/?nav=5">Job Posting</option><option value="../candidate-matches/?nav=5">Candidate Matches</option><option value="../screening-setup/?nav=5" selected>Screening Setup</option><option value="../candidate-messages/?nav=5">Candidate Messages</option></select></div></nav></header>
 
 <main><div class="intro"><div class="row"><h1>Screening Setup</h1><span id="setup-state" class="badge">Draft</span></div><p class="muted">Choose interview questions, set scoring descriptions, and approve the setup before screening.</p></div>
 <div id="setup-message" class="status" role="status" aria-live="polite"></div>
@@ -76,7 +76,7 @@ button:disabled{opacity:.6;cursor:default}
 // Add each new persona page to this navigation map on both pages.
 const personaPages={
 'job-seeker':[{label:'My Profile',href:'../my-profile/?nav=5'},{label:'Job Search',href:'../job-search/?nav=5'},{label:'My Applications',href:'../my-applications/?nav=5'}],
-'hiring-manager':[{label:'Job Posting',href:'../job-posting/?nav=5'},{label:'Candidate Matches',href:'../candidate-matches/?nav=5'},{label:'Screening Setup',href:'../screening-setup/?nav=5'}],
+'hiring-manager':[{label:'Job Posting',href:'../job-posting/?nav=5'},{label:'Candidate Matches',href:'../candidate-matches/?nav=5'},{label:'Screening Setup',href:'../screening-setup/?nav=5'},{label:'Candidate Messages',href:'../candidate-messages/?nav=5'}],
 'recruiter':[{label:'Candidate Records',href:'../candidate-records/?nav=5'}]
 };
 const personaSelect=document.getElementById('persona');

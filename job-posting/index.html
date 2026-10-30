@@ -51,7 +51,7 @@ h1,.intro h1{font-size:27px}
 }
 
 </style></head><body>
-<header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager" selected>Hiring manager</option><option value="recruiter">Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../job-posting/?nav=5" selected>Job Posting</option><option value="../candidate-matches/?nav=5">Candidate Matches</option></select></div></nav></header>
+<header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager" selected>Hiring manager</option><option value="recruiter">Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../job-posting/?nav=5" selected>Job Posting</option><option value="../candidate-matches/?nav=5">Candidate Matches</option><option value="../candidate-messages/?nav=5">Candidate Messages</option></select></div></nav></header>
 <main><div class="intro"><div class="row"><small class="eyebrow">JOB POSTING</small><span class="badge" id="posting-state">Draft</span></div><h1>Job Posting</h1><p class="muted">Enter job details, set qualifications, and choose an evaluation approach.</p></div>
 <form id="job-form">
 <section class="section"><small class="eyebrow">01 / THE ROLE</small><h2>Job details</h2><p>Give candidates a clear picture of the work and its purpose.</p>
@@ -84,7 +84,7 @@ h1,.intro h1{font-size:27px}
 // Add each new persona page to this navigation map on both pages.
 const personaPages={
 'job-seeker':[{label:'My Profile',href:'../my-profile/?nav=5'},{label:'Job Search',href:'../job-search/?nav=5'},{label:'My Applications',href:'../my-applications/?nav=5'}],
-'hiring-manager':[{label:'Job Posting',href:'../job-posting/?nav=5'},{label:'Candidate Matches',href:'../candidate-matches/?nav=5'},{label:'Screening Setup',href:'../screening-setup/?nav=5'}],
+'hiring-manager':[{label:'Job Posting',href:'../job-posting/?nav=5'},{label:'Candidate Matches',href:'../candidate-matches/?nav=5'},{label:'Screening Setup',href:'../screening-setup/?nav=5'},{label:'Candidate Messages',href:'../candidate-messages/?nav=5'}],
 'recruiter':[{label:'Candidate Records',href:'../candidate-records/?nav=5'}]
 };
 const personaSelect=document.getElementById('persona');

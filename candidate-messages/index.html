@@ -1,0 +1,219 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Candidate Messages · Team 4</title><style>
+:root{--ink:#181b20;--muted:#687382;--line:#e0e5eb;--blue:#2459db}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:14px/1.65 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{max-width:1000px;margin:auto;padding:22px 40px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.brand{font-size:21px;font-weight:750;letter-spacing:-.7px}header small{color:var(--muted)}main{max-width:820px;margin:44px auto;padding:0 40px}h1{font-size:38px;line-height:1.2;letter-spacing:-1.4px;font-weight:650;margin:10px 0}h2{font-size:22px;letter-spacing:-.6px;margin:0;font-weight:650}h3{font-size:16px;margin:0;font-weight:650}p{margin:8px 0 20px}.muted,small{color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:.13em;font-weight:650;display:block;color:var(--muted);margin-bottom:9px}.intro{margin-bottom:32px}.intro .muted{max-width:58ch}.section{padding:28px 0;border-top:1px solid var(--line)}.section>p{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:block;font-size:12px;font-weight:600;margin:16px 0 6px}input,textarea,select{width:100%;padding:10px 11px;border:1px solid #d6dde6;border-radius:5px;background:#fff;font:inherit;color:var(--ink)}textarea{resize:vertical;min-height:110px}button{font:600 12px/1.5 ui-sans-serif,system-ui;cursor:pointer;background:#fff;border:1px solid #d6dde6;border-radius:5px;padding:9px 13px;color:#414b59}button:hover{background:#f3f6fa}button.primary{background:var(--ink);border-color:var(--ink);color:#fff}button.primary:hover{background:#343b46}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}.row{display:flex;align-items:center;justify-content:space-between;gap:14px}.bucket{border:1px solid var(--line);border-radius:7px;padding:22px;margin:20px 0}.bucket>p{font-size:12px;color:var(--muted);margin:6px 0 18px}.criterion{padding:16px 0;border-top:1px solid var(--line)}.criterion p{font-size:12px;color:var(--muted);margin:5px 0}.criterion small{font-size:10px;text-transform:uppercase;letter-spacing:.06em}.criterion .actions{margin-top:9px}.actions{display:flex;flex-wrap:wrap;gap:8px}.criterion button{padding:4px 8px;font-size:11px}.count{font-size:11px;color:var(--muted);margin-left:7px;font-weight:400}.empty{font-size:13px;color:var(--muted)}fieldset{padding:0;border:0;margin:20px 0}legend{font-size:12px;font-weight:600;margin-bottom:10px}.choice{display:block;border:1px solid var(--line);border-radius:6px;padding:16px;margin:10px 0;cursor:pointer;font-weight:400}.choice:has(input:checked){border-color:#8ca9e8;background:#f6f8fe}.choice input{width:auto;margin:0 9px 0 0;accent-color:var(--blue)}.choice strong{font-size:13px}.choice small{display:block;padding-left:25px;margin-top:4px;font-weight:400;font-size:12px}.explanation{padding:14px 16px;background:#f6f8fb;border-left:2px solid #aabfe9;border-radius:3px;font-size:12px;color:#4e6078}.footer-actions{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding:24px 0}.footer-actions small{font-size:11px}.status{font-size:12px;color:#2d674d;min-height:24px}.status:empty{display:none}.status:not(:empty){padding:12px 0}dialog{width:min(640px,92vw);max-height:88vh;overflow:auto;border:1px solid var(--line);border-radius:9px;padding:28px;box-shadow:0 20px 80px #10182825}dialog::backdrop{background:#18233560}dialog .actions{margin-top:20px}.preview-block{padding:18px 0;border-top:1px solid var(--line);margin-top:18px}.preview-block p{white-space:pre-wrap;font-size:13px}.preview-block ul{padding-left:20px;font-size:13px}.badge{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 8px}.field-note{font-size:11px;color:var(--muted);margin-top:6px}footer{font-size:10px;color:var(--muted);padding-bottom:26px}@media(max-width:600px){header{padding:18px 20px}main{padding:0 20px;margin-top:30px}.grid{grid-template-columns:1fr;gap:0}h1{font-size:32px}.bucket{padding:17px}.row{flex-wrap:wrap}.footer-actions{align-items:flex-start;flex-direction:column}}
+
+.persona-chooser{display:flex;align-items:center;gap:10px}
+.persona-chooser label{margin:0;font-size:11px;font-weight:500;color:var(--muted)}
+.persona-chooser select{width:auto;min-width:145px;padding:7px 28px 7px 10px;font:500 12px/1.5 ui-sans-serif,system-ui;color:var(--ink);border:1px solid var(--line);border-radius:5px;background-color:#fff;cursor:pointer}
+@media(max-width:480px){.persona-chooser{gap:6px}.persona-chooser label{font-size:10px}.persona-chooser select{min-width:130px;font-size:11px}}
+
+.role-navigation{display:flex;align-items:center;justify-content:flex-end;gap:20px}
+.page-chooser{display:flex;align-items:center;gap:10px}
+.page-chooser label{margin:0;font-size:11px;font-weight:500;color:var(--muted)}
+.page-chooser select{width:auto;min-width:130px;padding:7px 28px 7px 10px;font:500 12px/1.5 ui-sans-serif,system-ui;color:var(--ink);border:1px solid var(--line);border-radius:5px;background-color:white;cursor:pointer}
+@media(max-width:650px){header{align-items:flex-start;gap:16px}.role-navigation{flex-direction:column;align-items:flex-end;gap:8px}.persona-chooser,.page-chooser{gap:8px}.persona-chooser select,.page-chooser select{width:145px;font-size:11px;min-width:0}.persona-chooser label,.page-chooser label{font-size:11px}}
+header{height:auto;min-height:76px}@media(max-width:650px){header{min-height:65px}}
+/* Both persona home pages always expose the same role and page controls. */
+header .role-navigation{display:flex;visibility:visible}
+header .page-chooser{display:flex;visibility:visible}
+header #page-navigation{display:block;visibility:visible;min-width:145px}
+@media(max-width:650px){header .role-navigation{flex-direction:column;align-items:flex-end}header #page-navigation{width:145px}}
+
+/* Compact page layout. */
+header{padding:14px 28px;min-height:64px}
+main{max-width:960px;margin:24px auto;padding:0 28px}
+body{line-height:1.5}
+h1,.intro h1{font-size:30px;letter-spacing:-.8px;max-width:none;margin:0 0 8px}
+h2{font-size:20px}
+.intro{margin-bottom:20px;padding-bottom:0;gap:12px}
+.intro>small.eyebrow,.intro>div>small,.intro>.row>small.eyebrow{display:none}
+.intro p{margin:6px 0 0;max-width:72ch}
+p{margin:6px 0 12px}
+.eyebrow{margin-bottom:6px}
+.section{padding:18px 0}
+.section>.eyebrow{display:none}
+label{margin-top:12px}
+.bucket{padding:16px;margin:14px 0}
+.bucket>p{margin-bottom:12px}
+.criterion{padding:12px 0}
+fieldset{margin:14px 0}
+.choice{padding:12px;margin:8px 0}
+.footer-actions{padding:16px 0}
+dialog{padding:20px}
+.preview-block,.detail-block,.detail-section{padding-top:14px;margin-top:14px}
+footer{padding-bottom:18px}
+@media(max-width:650px){
+header{padding:12px 16px;min-height:64px}
+main{padding:0 16px;margin-top:18px}
+h1,.intro h1{font-size:27px}
+.role-navigation{gap:6px}
+}
+
+
+.message-job{padding:16px;border:1px solid var(--line);border-radius:7px;margin:18px 0}.message-job label{margin-top:0}
+.recipient-tools{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin:14px 0}
+.recipient-tools label{margin-top:0}.recipient-tools select{min-width:200px}
+.select-all-label{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:400;margin:0}
+.select-all-label input,.recipient input{width:auto;flex:none;accent-color:var(--blue)}
+.candidate-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.recipient{display:flex;align-items:center;gap:10px;margin:0;font-size:13px;font-weight:400;cursor:pointer}
+.recipient small{display:block;font-size:12px;font-weight:400;margin-top:3px}
+.stage-control label{font-size:11px;margin:0 0 4px}.stage-control select{font-size:12px;min-width:180px}
+.recipient-summary{font-size:13px;padding:12px;background:#f3f6fa;border-radius:5px;margin:12px 0;overflow-wrap:anywhere}
+#message-text{min-height:110px}#message-status{position:sticky;top:0;z-index:2;background:white}
+.error{color:#a32626}.history-card{padding:14px 0;border-top:1px solid var(--line);margin-top:12px}
+.history-card h3{font-size:14px}.history-card small{font-size:11px}
+.history-recipients{font-size:12px;color:#536174;overflow-wrap:anywhere}
+.message-body{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:600px){.recipient-tools{align-items:flex-start;flex-direction:column;gap:12px}.candidate-row{align-items:flex-start;flex-direction:column;gap:8px}.stage-control{width:100%}.stage-control select{width:100%}}
+</style></head><body><header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager" selected>Hiring manager</option><option value="recruiter">Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../job-posting/?nav=5">Job Posting</option><option value="../candidate-matches/?nav=5">Candidate Matches</option><option value="../screening-setup/?nav=5">Screening Setup</option><option value="../candidate-messages/?nav=5" selected>Candidate Messages</option></select></div></nav></header>
+
+
+<main><div class="intro"><h1>Candidate Messages</h1><p class="muted">Send a message to one candidate, several candidates, or a hiring-stage group.</p></div>
+<div id="message-status" class="status" role="status" aria-live="polite"></div>
+<div class="message-job"><label for="message-job">Job</label><select id="message-job"></select></div>
+<section class="section" aria-labelledby="recipients-heading"><div class="row"><h2 id="recipients-heading">Recipients</h2><span class="count" id="selected-count" role="status" aria-live="polite"></span></div>
+<p>Choose candidates below. Filter by stage to select a group. Changing a stage updates the groups immediately.</p>
+<div class="recipient-tools"><div><label for="stage-filter">Show candidates</label><select id="stage-filter"></select></div><label class="select-all-label"><input type="checkbox" id="select-all">Select all shown</label></div>
+<div id="message-candidates"></div></section>
+<section class="section" aria-labelledby="compose-heading"><h2 id="compose-heading">Message</h2><p id="recipient-summary" class="recipient-summary" aria-live="polite"></p>
+<form id="compose-form" novalidate><label for="message-text">Your message</label><textarea id="message-text" maxlength="2000" placeholder="Write a message to the selected candidates"></textarea><div class="actions"><button type="submit" class="primary">Send message</button></div></form></section>
+<section class="section" aria-labelledby="history-heading"><div class="row"><h2 id="history-heading">Message history</h2><span class="count" id="history-count"></span></div><div id="message-history"></div></section>
+<footer>Team 4</footer></main><script>'use strict';
+// Add each new persona page to this navigation map on both pages.
+const personaPages={
+'job-seeker':[{label:'My Profile',href:'../my-profile/?nav=5'},{label:'Job Search',href:'../job-search/?nav=5'},{label:'My Applications',href:'../my-applications/?nav=5'}],
+'hiring-manager':[{label:'Job Posting',href:'../job-posting/?nav=5'},{label:'Candidate Matches',href:'../candidate-matches/?nav=5'},{label:'Screening Setup',href:'../screening-setup/?nav=5'},{label:'Candidate Messages',href:'../candidate-messages/?nav=5'}],
+'recruiter':[{label:'Candidate Records',href:'../candidate-records/?nav=5'}]
+};
+const personaSelect=document.getElementById('persona');
+const pageSelect=document.getElementById('page-navigation');
+function populatePages(role){
+pageSelect.replaceChildren();
+for(const page of personaPages[role]||[]){
+const option=document.createElement('option');option.value=page.href;option.textContent=page.label;
+option.selected=new URL(page.href,window.location.href).pathname===window.location.pathname;
+pageSelect.append(option);
+}
+}
+populatePages(personaSelect.value);
+personaSelect.addEventListener('change',event=>{
+const pages=personaPages[event.target.value];
+populatePages(event.target.value);
+if(pages&&pages.length)window.location.assign(pages[0].href);
+});
+pageSelect.addEventListener('change',event=>{
+const pages=personaPages[personaSelect.value]||[];
+if(pages.some(page=>page.href===event.target.value))window.location.assign(event.target.value);
+});
+// Restore the page's actual role if the browser restores select values on Back.
+window.addEventListener('pageshow',()=>{
+personaSelect.value='hiring-manager';
+populatePages(personaSelect.value);
+});
+
+
+const $=id=>document.getElementById(id);
+const storageKey='team4-candidate-messages-v1';
+const stages=['Submitted','In review','Interview','Not moving forward'];
+const candidates=[
+{id:'alex',name:'Alex Morgan',role:'Retail Shift Lead'},
+{id:'jamie',name:'Jamie Chen',role:'Operations Specialist'},
+{id:'riley',name:'Riley Patel',role:'Customer Support Trainer'},
+{id:'taylor',name:'Taylor Brooks',role:'Volunteer Program Coordinator'}
+];
+const jobs=[{id:'posting',title:'Operations Coordinator',company:'Juniper Supply Co.'},{id:'training',title:'Training Coordinator',company:'Juniper Supply Co.'}];
+try{const posting=JSON.parse(localStorage.getItem('team4-us14-job-posting-v1'));if(posting&&posting.title){jobs[0].title=posting.title;jobs[0].company=posting.company||jobs[0].company;}}catch(e){}
+const defaults={
+posting:{alex:'In review',jamie:'Interview',riley:'Not moving forward',taylor:'Submitted'},
+training:{alex:'Interview',jamie:'Not moving forward',riley:'Interview',taylor:'In review'}
+};
+let saved={};
+try{const data=JSON.parse(localStorage.getItem(storageKey));if(data&&typeof data==='object'&&!Array.isArray(data))saved=data;}catch(e){}
+function initialJob(id){
+const data=saved[id]||{};
+return {stages:Object.fromEntries(candidates.map(c=>[c.id,stages.includes(data.stages?.[c.id])?data.stages[c.id]:defaults[id][c.id]])),
+history:Array.isArray(data.history)?data.history.filter(m=>m&&typeof m.text==='string'&&typeof m.sentAt==='string'&&Array.isArray(m.recipients)&&m.recipients.every(r=>r&&typeof r.name==='string'&&typeof r.stage==='string')):[]};
+}
+let records=Object.fromEntries(jobs.map(job=>[job.id,initialJob(job.id)]));
+let jobId='posting';
+let selected=new Set();
+function node(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;}
+function say(text,error=false){$('message-status').textContent=text;$('message-status').className='status'+(error?' error':'');}
+function persist(next){
+try{localStorage.setItem(storageKey,JSON.stringify(next));records=next;return true;}
+catch(e){say('Could not save changes. Allow browser storage and try again.',true);return false;}
+}
+function current(){return records[jobId];}
+function visibleCandidates(){const stage=$('stage-filter').value;return candidates.filter(c=>stage==='all'||current().stages[c.id]===stage);}
+function updateSelection(){
+const visible=visibleCandidates();const ids=new Set(visible.map(c=>c.id));
+selected=new Set([...selected].filter(id=>ids.has(id)));
+const count=visible.filter(c=>selected.has(c.id)).length;
+$('select-all').checked=visible.length>0&&count===visible.length;
+$('select-all').indeterminate=count>0&&count<visible.length;
+$('select-all').disabled=!visible.length;
+$('selected-count').textContent=selected.size+' selected';
+$('recipient-summary').textContent=selected.size?'To: '+candidates.filter(c=>selected.has(c.id)).map(c=>c.name).join(', '):'Select one or more recipients above.';
+$('message-candidates').querySelectorAll('input[type="checkbox"]').forEach(input=>input.checked=selected.has(input.value));
+}
+function renderFilters(){
+const previous=$('stage-filter').value||'all';
+$('stage-filter').replaceChildren();
+const all=node('option','All stages ('+candidates.length+')');all.value='all';$('stage-filter').append(all);
+for(const stage of stages){const count=candidates.filter(c=>current().stages[c.id]===stage).length;const option=node('option',stage+' ('+count+')');option.value=stage;$('stage-filter').append(option);}
+$('stage-filter').value=previous;
+}
+function renderCandidates(){
+const visible=visibleCandidates();
+$('message-candidates').replaceChildren();
+visible.forEach(candidate=>{
+const row=node('div',undefined,'candidate-row');
+const label=node('label',undefined,'recipient');
+const checkbox=node('input');checkbox.type='checkbox';checkbox.value=candidate.id;checkbox.checked=selected.has(candidate.id);
+checkbox.setAttribute('aria-label','Select '+candidate.name);
+checkbox.onchange=()=>{if(checkbox.checked)selected.add(candidate.id);else selected.delete(candidate.id);updateSelection();say('');};
+const identity=node('span');identity.append(node('strong',candidate.name),node('small',candidate.role));label.append(checkbox,identity);row.append(label);
+const stageBox=node('div',undefined,'stage-control');const stageLabel=node('label','Stage');stageLabel.htmlFor='stage-'+candidate.id;
+const select=node('select');select.id=stageLabel.htmlFor;select.setAttribute('aria-label','Stage for '+candidate.name);
+for(const stage of stages){const option=node('option',stage);option.value=stage;select.append(option);}select.value=current().stages[candidate.id];
+select.onchange=()=>{
+const next=structuredClone(records);next[jobId].stages[candidate.id]=select.value;
+if(!persist(next)){select.value=current().stages[candidate.id];return;}
+renderFilters();renderCandidates();say(candidate.name+' moved to '+current().stages[candidate.id]+'. Recipient groups updated.');
+const replacement=$('stage-'+candidate.id);if(replacement)replacement.focus();else $('stage-filter').focus();
+};
+stageBox.append(stageLabel,select);row.append(stageBox);$('message-candidates').append(row);
+});
+if(!visible.length)$('message-candidates').append(node('p','No candidates in this stage.','empty'));
+updateSelection();
+}
+function renderHistory(){
+$('message-history').replaceChildren();
+const history=current().history;
+$('history-count').textContent=history.length;
+if(!history.length){$('message-history').append(node('p','No messages sent for this job.','empty'));return;}
+[...history].reverse().forEach(message=>{
+const card=node('article',undefined,'history-card');
+card.append(node('h3','Message to '+message.recipients.length+' candidate'+(message.recipients.length===1?'':'s')),node('small',new Date(message.sentAt).toLocaleString()));
+card.append(node('p','To: '+message.recipients.map(r=>r.name+' ('+r.stage+')').join(', '),'history-recipients'));
+card.append(node('p',message.text,'message-body'));$('message-history').append(card);
+});
+}
+jobs.forEach(job=>{const option=node('option',job.title+' · '+job.company);option.value=job.id;$('message-job').append(option);});
+$('message-job').value=jobId;
+$('message-job').onchange=event=>{jobId=event.target.value;selected.clear();$('stage-filter').value='all';$('message-text').value='';renderFilters();renderCandidates();renderHistory();say('');};
+$('stage-filter').onchange=()=>{selected.clear();renderCandidates();say('');};
+$('select-all').onchange=event=>{selected=new Set(event.target.checked?visibleCandidates().map(c=>c.id):[]);updateSelection();say('');};
+$('compose-form').onsubmit=event=>{
+event.preventDefault();updateSelection();
+const recipients=candidates.filter(c=>selected.has(c.id)).map(c=>({id:c.id,name:c.name,stage:current().stages[c.id]}));
+if(!recipients.length){say('Select at least one candidate before sending.',true);$('stage-filter').focus();return;}
+const text=$('message-text').value.trim();
+if(!text){say('Enter a message before sending.',true);$('message-text').focus();return;}
+const next=structuredClone(records);next[jobId].history.push({text,recipients,sentAt:new Date().toISOString()});
+if(!persist(next))return;
+selected.clear();$('message-text').value='';updateSelection();renderHistory();
+say('Message sent to '+recipients.length+' candidate'+(recipients.length===1?'':'s')+'.');
+};
+renderFilters();renderCandidates();renderHistory();
+</script></body></html>
