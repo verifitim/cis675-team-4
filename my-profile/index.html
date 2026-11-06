@@ -228,6 +228,14 @@ h1,.intro h1{font-size:27px}
 #profile-details{margin-bottom:18px}
 @media(max-width:650px){.skill-bucket{padding:14px}.profile-flow{margin-top:14px}}
 
+/* Resume upload: readable instructions and a strong keyboard focus indicator. */
+.upload #resume-help,.upload #resume-name{color:#424a54;font-size:14px}
+.upload #resume-error{color:#a11b1b;font-size:14px;font-weight:600}
+.upload #resume-status{color:#265e47;font-size:14px}
+.upload #resume-error:empty,.upload #resume-status:empty{margin:0}
+.upload #resume,.upload #remove-resume{font-size:14px;min-height:44px}
+.upload #resume::file-selector-button{font-size:14px;min-height:36px}
+.upload #resume:focus-visible,.upload #remove-resume:focus-visible{outline:3px solid #2459db;outline-offset:4px}
 </style>
 </head>
 <body>
@@ -245,7 +253,7 @@ h1,.intro h1{font-size:27px}
 <label for="about">About you</label><textarea id="about" maxlength="2000"></textarea>
 <div class="actions"><button class="primary" type="submit">Save profile</button></div>
 </form></section>
-<section class="card"><h2>Resume</h2><p class="muted">Keep your current resume with your profile so employers can review your background.</p><div class="upload"><label for="resume">Upload or replace resume <span class="field-hint">PDF or DOCX · Up to 5 MB</span></label><input type="file" id="resume" accept=".pdf,.docx"><p id="resume-name"></p><button id="remove-resume" hidden>Remove resume</button></div></section></div>
+<section class="card"><h2>Resume</h2><p class="muted">Keep your current resume with your profile so employers can review your background.</p><div class="upload"><label for="resume">Choose your resume</label><p id="resume-help">PDF or DOCX, maximum 5 MB. Choosing a file replaces your current resume.</p><input type="file" id="resume" accept=".pdf,.docx" aria-describedby="resume-help resume-error"><p id="resume-error" role="alert" aria-atomic="true"></p><p id="resume-name"></p><p id="resume-status" role="status" aria-atomic="true"></p><button type="button" id="remove-resume" hidden>Remove resume</button></div></section></div>
 <div class="profile-flow">
 
 <div class="workflow-guide" aria-label="Skill review process"><strong>Find skills</strong><span aria-hidden="true">→</span><strong>Review discoveries</strong><span aria-hidden="true">→</span><strong>Add to My skills</strong></div>
@@ -399,8 +407,39 @@ $('cancel').onclick=()=>$('editor').close();
 $('add-experience').onclick=()=>editExperience();
 $('add-skill').onclick=()=>editSkill();
 $('restore').onclick=()=>{state.skills.forEach(s=>{if(s.state==='dismissed')s.state='suggested';});save('Dismissed skills restored for review.');};
-$('resume').onchange=event=>{const file=event.target.files[0];if(!file)return;if(!/\.(pdf|docx)$/i.test(file.name)||file.size>5*1024*1024){say('Select a PDF or DOCX smaller than 5 MB.');event.target.value='';return;}state.resume=file.name;save('Resume updated.');event.target.value='';};
-$('remove-resume').onclick=()=>{state.resume='';save('Resume removed.');};
+function resumeFeedback(message,isError=false){
+$('resume-error').textContent=isError?message:'';
+$('resume-status').textContent=isError?'':message;
+if(isError)$('resume').setAttribute('aria-invalid','true');
+else $('resume').removeAttribute('aria-invalid');
+}
+function storeResume(name,message){
+const previous=state.resume;
+state.resume=name;
+if(!persist()){
+state.resume=previous;
+resumeFeedback('Your resume change could not be saved. Please try again.',true);
+return false;
+}
+render();
+resumeFeedback(message);
+return true;
+}
+$('resume').onchange=event=>{
+const file=event.target.files[0];
+if(!file)return;
+if(!/\.(pdf|docx)$/i.test(file.name)){
+resumeFeedback('This file type is not supported. Choose a PDF or DOCX file.',true);
+}else if(file.size>5*1024*1024){
+resumeFeedback('This file is too large. Choose a file no larger than 5 MB.',true);
+}else{
+storeResume(file.name,'Resume added: '+file.name);
+}
+event.target.value='';
+};
+$('remove-resume').onclick=()=>{
+if(storeResume('','Resume removed.'))$('resume').focus();
+};
 
 $('edit-profile-toggle').onclick=()=>{const panel=$('profile-details');panel.hidden=!panel.hidden;$('edit-profile-toggle').setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden)$('name').focus();};
 $('edit-qualifications').onclick=()=>openEditor('Education & certifications',[{key:'details',label:'Education, coursework, certifications, and dates',value:state.qualifications||$('qualification-text').textContent,multiline:true,required:true}],values=>{state.qualifications=values.details;save('Qualifications updated.');});
