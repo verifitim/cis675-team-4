@@ -19,3 +19,19 @@ Automatic resume parsing and profile population, employer evaluation configurati
 ## Validation
 
 JavaScript syntax, referenced element IDs, and the staged discovery state transitions were checked with a DOM stand-in. A browser execution environment was unavailable for visual or end-to-end testing.
+
+## IC feedback: resume upload accessibility
+
+Updated the resume picker with a visible label, programmatically linked PDF/DOCX and 5 MB instructions, a prominent keyboard focus outline, nearby text errors announced through role="alert", and confirmation/removal messages announced through role="status". Invalid selections preserve the current resume. Removing a resume returns focus to the picker. These targeted improvements do not establish whole-page or whole-site WCAG conformance.
+
+Simple review evidence:
+1. Tab to Choose File and show the focus outline and instructions.
+2. Select a PDF or DOCX no larger than 5 MB and show the filename and confirmation.
+3. Select an unsupported or oversized file and show the specific error.
+4. With a screen reader, verify instructions and feedback are announced; tab to Remove resume, activate it, and verify focus returns to the picker.
+
+Automated checks passed for JavaScript syntax, accepted PDF/DOCX names, the exact 5 MB boundary, unsupported extensions, oversized files, error recovery, storage failure rollback, removal/focus behavior, and feedback markup. Screen-reader and visual browser checks remain manual.
+
+References:
+- https://www.w3.org/WAI/tutorials/forms/labels/
+- https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html
