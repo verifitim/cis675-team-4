@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Retention Insights · Team 4</title><style>
+:root{--ink:#181b20;--muted:#687382;--line:#e0e5eb;--blue:#2459db}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:14px/1.65 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{max-width:1000px;margin:auto;padding:22px 40px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.brand{font-size:21px;font-weight:750;letter-spacing:-.7px}header small{color:var(--muted)}main{max-width:820px;margin:44px auto;padding:0 40px}h1{font-size:38px;line-height:1.2;letter-spacing:-1.4px;font-weight:650;margin:10px 0}h2{font-size:22px;letter-spacing:-.6px;margin:0;font-weight:650}h3{font-size:16px;margin:0;font-weight:650}p{margin:8px 0 20px}.muted,small{color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:.13em;font-weight:650;display:block;color:var(--muted);margin-bottom:9px}.intro{margin-bottom:32px}.intro .muted{max-width:58ch}.section{padding:28px 0;border-top:1px solid var(--line)}.section>p{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:block;font-size:12px;font-weight:600;margin:16px 0 6px}input,textarea,select{width:100%;padding:10px 11px;border:1px solid #d6dde6;border-radius:5px;background:#fff;font:inherit;color:var(--ink)}textarea{resize:vertical;min-height:110px}button{font:600 12px/1.5 ui-sans-serif,system-ui;cursor:pointer;background:#fff;border:1px solid #d6dde6;border-radius:5px;padding:9px 13px;color:#414b59}button:hover{background:#f3f6fa}button.primary{background:var(--ink);border-color:var(--ink);color:#fff}button.primary:hover{background:#343b46}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}.row{display:flex;align-items:center;justify-content:space-between;gap:14px}.bucket{border:1px solid var(--line);border-radius:7px;padding:22px;margin:20px 0}.bucket>p{font-size:12px;color:var(--muted);margin:6px 0 18px}.criterion{padding:16px 0;border-top:1px solid var(--line)}.criterion p{font-size:12px;color:var(--muted);margin:5px 0}.criterion small{font-size:10px;text-transform:uppercase;letter-spacing:.06em}.criterion .actions{margin-top:9px}.actions{display:flex;flex-wrap:wrap;gap:8px}.criterion button{padding:4px 8px;font-size:11px}.count{font-size:11px;color:var(--muted);margin-left:7px;font-weight:400}.empty{font-size:13px;color:var(--muted)}fieldset{padding:0;border:0;margin:20px 0}legend{font-size:12px;font-weight:600;margin-bottom:10px}.choice{display:block;border:1px solid var(--line);border-radius:6px;padding:16px;margin:10px 0;cursor:pointer;font-weight:400}.choice:has(input:checked){border-color:#8ca9e8;background:#f6f8fe}.choice input{width:auto;margin:0 9px 0 0;accent-color:var(--blue)}.choice strong{font-size:13px}.choice small{display:block;padding-left:25px;margin-top:4px;font-weight:400;font-size:12px}.explanation{padding:14px 16px;background:#f6f8fb;border-left:2px solid #aabfe9;border-radius:3px;font-size:12px;color:#4e6078}.footer-actions{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding:24px 0}.footer-actions small{font-size:11px}.status{font-size:12px;color:#2d674d;min-height:24px}.status:empty{display:none}.status:not(:empty){padding:12px 0}dialog{width:min(640px,92vw);max-height:88vh;overflow:auto;border:1px solid var(--line);border-radius:9px;padding:28px;box-shadow:0 20px 80px #10182825}dialog::backdrop{background:#18233560}dialog .actions{margin-top:20px}.preview-block{padding:18px 0;border-top:1px solid var(--line);margin-top:18px}.preview-block p{white-space:pre-wrap;font-size:13px}.preview-block ul{padding-left:20px;font-size:13px}.badge{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 8px}.field-note{font-size:11px;color:var(--muted);margin-top:6px}footer{font-size:10px;color:var(--muted);padding-bottom:26px}@media(max-width:600px){header{padding:18px 20px}main{padding:0 20px;margin-top:30px}.grid{grid-template-columns:1fr;gap:0}h1{font-size:32px}.bucket{padding:17px}.row{flex-wrap:wrap}.footer-actions{align-items:flex-start;flex-direction:column}}
+
+.persona-chooser{display:flex;align-items:center;gap:10px}
+.persona-chooser label{margin:0;font-size:11px;font-weight:500;color:var(--muted)}
+.persona-chooser select{width:auto;min-width:145px;padding:7px 28px 7px 10px;font:500 12px/1.5 ui-sans-serif,system-ui;color:var(--ink);border:1px solid var(--line);border-radius:5px;background-color:#fff;cursor:pointer}
+@media(max-width:480px){.persona-chooser{gap:6px}.persona-chooser label{font-size:10px}.persona-chooser select{min-width:130px;font-size:11px}}
+
+.role-navigation{display:flex;align-items:center;justify-content:flex-end;gap:20px}
+.page-chooser{display:flex;align-items:center;gap:10px}
+.page-chooser label{margin:0;font-size:11px;font-weight:500;color:var(--muted)}
+.page-chooser select{width:auto;min-width:130px;padding:7px 28px 7px 10px;font:500 12px/1.5 ui-sans-serif,system-ui;color:var(--ink);border:1px solid var(--line);border-radius:5px;background-color:white;cursor:pointer}
+@media(max-width:650px){header{align-items:flex-start;gap:16px}.role-navigation{flex-direction:column;align-items:flex-end;gap:8px}.persona-chooser,.page-chooser{gap:8px}.persona-chooser select,.page-chooser select{width:145px;font-size:11px;min-width:0}.persona-chooser label,.page-chooser label{font-size:11px}}
+header{height:auto;min-height:76px}@media(max-width:650px){header{min-height:65px}}
+/* Both persona home pages always expose the same role and page controls. */
+header .role-navigation{display:flex;visibility:visible}
+header .page-chooser{display:flex;visibility:visible}
+header #page-navigation{display:block;visibility:visible;min-width:145px}
+@media(max-width:650px){header .role-navigation{flex-direction:column;align-items:flex-end}header #page-navigation{width:145px}}
+
+/* Compact page layout. */
+header{padding:14px 28px;min-height:64px}
+main{max-width:960px;margin:24px auto;padding:0 28px}
+body{line-height:1.5}
+h1,.intro h1{font-size:30px;letter-spacing:-.8px;max-width:none;margin:0 0 8px}
+h2{font-size:20px}
+.intro{margin-bottom:20px;padding-bottom:0;gap:12px}
+.intro>small.eyebrow,.intro>div>small,.intro>.row>small.eyebrow{display:none}
+.intro p{margin:6px 0 0;max-width:72ch}
+p{margin:6px 0 12px}
+.eyebrow{margin-bottom:6px}
+.section{padding:18px 0}
+.section>.eyebrow{display:none}
+label{margin-top:12px}
+.bucket{padding:16px;margin:14px 0}
+.bucket>p{margin-bottom:12px}
+.criterion{padding:12px 0}
+fieldset{margin:14px 0}
+.choice{padding:12px;margin:8px 0}
+.footer-actions{padding:16px 0}
+dialog{padding:20px}
+.preview-block,.detail-block,.detail-section{padding-top:14px;margin-top:14px}
+footer{padding-bottom:18px}
+@media(max-width:650px){
+header{padding:12px 16px;min-height:64px}
+main{padding:0 16px;margin-top:18px}
+h1,.intro h1{font-size:27px}
+.role-navigation{gap:6px}
+}
+
+
+.records-toolbar{border:1px solid var(--line);border-radius:7px;padding:16px;margin:18px 0}
+.records-toolbar p{margin:0 0 10px}.records-toolbar .actions{align-items:center;justify-content:space-between}
+.toggle-all{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400;margin:0}
+.toggle-all input{width:auto;margin:0;accent-color:var(--blue)}
+.records-heading{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.record-card{padding:16px 0;border-bottom:1px solid var(--line)}.record-card h3{font-size:18px}
+.record-card>.muted{font-size:13px;margin:4px 0 8px}.contact p{font-size:13px;margin:3px 0;overflow-wrap:anywhere}.contact small{font-size:11px}
+.retained{color:#316048;background:#edf5ef}.duplicate{color:#826534;background:#fbf4e7}
+.duplicate-group{padding:16px 0;border-top:1px solid var(--line);margin-top:16px}.duplicate-group>h3{margin-bottom:12px}
+.retained-record,.hidden-record{padding:12px;border:1px solid var(--line);border-radius:5px;margin:10px 0}
+.retained-record{border-left:3px solid #739a7c}.hidden-record{border-left:3px solid #baa06a}
+.match-evidence{background:#f6f8fb;padding:12px;border-radius:5px;font-size:12px;overflow-wrap:anywhere}.match-evidence p{margin:6px 0}
+button:disabled{opacity:.6;cursor:default}
+@media(max-width:600px){.records-toolbar .actions{align-items:flex-start;flex-direction:column}.record-card .row{align-items:flex-start}}
+
+.candidate-search{border:1px solid var(--line);border-radius:7px;padding:16px;margin:18px 0}
+.candidate-search label{margin-top:0}.candidate-search .actions{margin-top:12px}
+.candidate-search .field-note{margin:8px 0 0}
+.search-match-box{background:#eef4ff;border:1px solid #b8cdef;border-left:4px solid #2459db;border-radius:5px;padding:14px 16px;margin:12px 0;color:#263f63;overflow-wrap:anywhere}
+.search-match-box h4{font-size:14px;margin:0 0 9px;font-weight:750;color:#194780}
+.search-match-box p{font-size:13px;margin:7px 0;line-height:1.6}
+.search-match-box mark{background:#ffe594;color:#382b00;font-weight:750;padding:1px 2px;border-radius:2px}
+.candidate-background{font-size:13px;color:#536174;margin:12px 0}.candidate-background p{margin:6px 0;overflow-wrap:anywhere}
+.no-candidates{padding:20px 0;font-size:14px;color:#536174}
+@media(max-width:600px){.search-match-box{padding:12px}.candidate-search{padding:14px}}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.panel,.kpi{border:1px solid var(--line);border-radius:7px;padding:16px}.kpi strong{display:block;font-size:27px;line-height:1.3}.kpi small{display:block}.filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.bar-row{margin:12px 0}.bar-row progress{width:100%;height:12px;accent-color:var(--blue)}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}.policy{background:#f6f8fb;padding:14px;border-radius:6px;margin:16px 0}.active{color:#316048}.inactive{color:#826534}@media(max-width:700px){.kpis{grid-template-columns:1fr 1fr}.chart-row,.filters{grid-template-columns:1fr}}
+</style></head><body><header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager">Hiring manager</option><option value="recruiter" selected>Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../candidate-records/?nav=5">Candidate Records</option><option value="../retention-insights/?nav=5" selected>Retention Insights</option></select></div></nav></header><main><div class="intro"><h1>Retention Insights</h1><p class="muted">Assess hiring and employee retention across your client companies.</p></div><div class="panel"><div class="filters"><div><label for="company">Company</label><select id="company"></select></div><div><label for="from">Start date</label><input type="date" id="from"></div><div><label for="to">End date</label><input type="date" id="to"></div></div><div class="row"><p id="vendor-status" class="muted"></p><button id="export" type="button">Export report (CSV)</button></div><p id="notice" role="status" class="field-note"></p></div><div id="dashboard"><div id="kpis" class="kpis"></div><div class="explanation"><strong>12-calendar-month retention rate</strong><br>The percentage of placed candidates who remain continuously employed by the hiring company through their 12-calendar-month start-date anniversary. Only hires whose anniversary has occurred as of the reporting end date are eligible. Employees leaving before their anniversary are not retained; newer hires are pending and excluded from the denominator.</div><div class="chart-row"><section class="panel"><h2>Hiring trend</h2><small>Placements by start year</small><div id="trend"></div></section><section class="panel"><h2>Employee retention</h2><small>12-calendar-month retention by company</small><div id="retention"></div></section></div><section class="panel"><h2>Performance by company</h2><div class="table-wrap"><table><thead><tr><th>Company</th><th>Hires</th><th>Time to fill</th><th>Offer acceptance</th><th>Retained / eligible</th><th>Retention</th><th>Pending</th></tr></thead><tbody id="companies"></tbody></table></div></section></div><section class="policy"><h3>5-year historical data retention policy</h3><p>Records are accessible for up to five calendar years while an active vendor relationship is maintained. Inactive client records are unavailable.</p><label for="vendor">Client vendor relationship</label><select id="vendor"></select><label for="vendor-active">Relationship status</label><select id="vendor-active"><option value="active">Active vendor</option><option value="inactive">Inactive vendor</option></select></section><footer>Team 4</footer></main><script>
+const personaPages={
+'job-seeker':[{label:'My Profile',href:'../my-profile/?nav=5'},{label:'Job Search',href:'../job-search/?nav=5'},{label:'My Applications',href:'../my-applications/?nav=5'}],
+'hiring-manager':[{label:'Job Posting',href:'../job-posting/?nav=5'},{label:'Candidate Matches',href:'../candidate-matches/?nav=5'},{label:'Screening Setup',href:'../screening-setup/?nav=5'},{label:'Candidate Messages',href:'../candidate-messages/?nav=5'}],
+'recruiter':[{label:'Candidate Records',href:'../candidate-records/?nav=5'},{label:'Retention Insights',href:'../retention-insights/?nav=5'}]
+};
+const personaSelect=document.getElementById('persona');
+const pageSelect=document.getElementById('page-navigation');
+function populatePages(role){
+pageSelect.replaceChildren();
+for(const page of personaPages[role]||[]){
+const option=document.createElement('option');option.value=page.href;option.textContent=page.label;
+option.selected=new URL(page.href,window.location.href).pathname===window.location.pathname;
+pageSelect.append(option);
+}
+}
+populatePages(personaSelect.value);
+personaSelect.addEventListener('change',event=>{
+const pages=personaPages[event.target.value];
+populatePages(event.target.value);
+if(pages&&pages.length)window.location.assign(pages[0].href);
+});
+pageSelect.addEventListener('change',event=>{
+const pages=personaPages[personaSelect.value]||[];
+if(pages.some(page=>page.href===event.target.value))window.location.assign(event.target.value);
+});
+// Restore the page's actual role if the browser restores select values on Back.
+window.addEventListener('pageshow',()=>{
+personaSelect.value='recruiter';
+populatePages(personaSelect.value);
+});
+const $=id=>document.getElementById(id);
+const names=['Juniper Supply Co.','Aspen Distribution','Meadow Services','Pine Market'];
+const active=Object.fromEntries(names.map(n=>[n,true]));
+const today=new Date();const iso=d=>d.toISOString().slice(0,10);
+function shift(d,months){const x=new Date(d+'T00:00:00Z');const day=x.getUTCDate();x.setUTCDate(1);x.setUTCMonth(x.getUTCMonth()+months);const last=new Date(Date.UTC(x.getUTCFullYear(),x.getUTCMonth()+1,0)).getUTCDate();x.setUTCDate(Math.min(day,last));return iso(x);}
+const end=iso(today), earliest=shift(end,-60);
+for(const id of ['from','to']){$(id).min=earliest;$(id).max=end;} $('from').value=earliest;$('to').value=end;
+function option(el,v,t){const o=document.createElement('option');o.value=v;o.textContent=t;el.append(o);}
+option($('company'),'all','All companies');names.forEach(n=>{option($('company'),n,n);option($('vendor'),n,n);});
+const records=[];names.forEach((name,i)=>{for(let m=0;m<60;m++){const count=1+((m+i*3)%4);for(let j=0;j<count;j++){const start=shift(end,-m);const retained=(m*7+j*3+i*5)%100<85-i*4;records.push({name,start,leave:retained?null:shift(start,3+(m%8)),days:20+i*3+(m+j)%15});}}});
+const offers=[];names.forEach((name,i)=>{for(let m=0;m<60;m++){const count=records.filter(r=>r.name===name&&r.start===shift(end,-m)).length;offers.push({name,date:shift(end,-m),accepted:count,total:count+((m+i)%4===0?1:0)});}});
+function metrics(group,os,asof){const eligible=group.filter(r=>shift(r.start,12)<=asof);const kept=eligible.filter(r=>!r.leave||r.leave>shift(r.start,12)).length;const offered=os.reduce((a,r)=>a+r.total,0),accepted=os.reduce((a,r)=>a+r.accepted,0);return {hires:group.length,days:group.length?Math.round(group.reduce((a,r)=>a+r.days,0)/group.length):null,accept:offered?Math.round(100*accepted/offered):null,eligible:eligible.length,kept,pending:group.length-eligible.length,rate:eligible.length?Math.round(100*kept/eligible.length):null};}
+const pct=v=>v===null?'N/A':v+'%';const days=v=>v===null?'N/A':v+' days';
+function el(tag,t,cls){const e=document.createElement(tag);if(t!==undefined)e.textContent=t;if(cls)e.className=cls;return e;}
+function bar(parent,label,value,max,display){const b=el('div',undefined,'bar-row'),r=el('div',undefined,'row');r.append(el('span',label),el('strong',display));b.append(r);if(value!==null){const p=el('progress');p.max=max||1;p.value=value;p.setAttribute('aria-label',label);b.append(p);}parent.append(b);}
+let report=[];
+function render(){const from=$('from').value,to=$('to').value,company=$('company').value;const valid=from>=earliest&&to<=end&&from<=to;const selected=names.filter(n=>active[n]&&(company==='all'||company===n));$('vendor-status').textContent=selected.length+' active client companies in view';$('notice').textContent=!valid?'Choose a valid date range within the last five years.':!selected.length?'Records unavailable: no active vendor relationship for this selection.':'';$('dashboard').hidden=!valid||!selected.length;$('export').disabled=!valid||!selected.length;report=[];if(!valid||!selected.length)return;
+const rows=records.filter(r=>selected.includes(r.name)&&r.start>=from&&r.start<=to),os=offers.filter(r=>selected.includes(r.name)&&r.date>=from&&r.date<=to),m=metrics(rows,os,to);
+$('kpis').replaceChildren();for(const [label,value,note] of [['Total hires',m.hires,'Successful placements'],['Average time to fill',days(m.days),'Per placement'],['Offer acceptance rate',pct(m.accept),'Accepted / extended offers'],['12-calendar-month retention rate',pct(m.rate),m.kept+' of '+m.eligible+' eligible · '+m.pending+' pending']]){const k=el('div',undefined,'kpi');k.append(el('small',label),el('strong',value),el('small',note));$('kpis').append(k);}
+$('trend').replaceChildren();const years={};for(let y=Number(from.slice(0,4));y<=Number(to.slice(0,4));y++)years[y]=0;rows.forEach(r=>years[r.start.slice(0,4)]++);for(const [y,n] of Object.entries(years))bar($('trend'),y,n,Math.max(1,...Object.values(years)),String(n));
+$('retention').replaceChildren();$('companies').replaceChildren();for(const name of selected){const x=metrics(rows.filter(r=>r.name===name),os.filter(r=>r.name===name),to);bar($('retention'),name,x.rate,100,pct(x.rate));const vals=[name,x.hires,days(x.days),pct(x.accept),x.kept+' / '+x.eligible,pct(x.rate),x.pending];report.push(vals);const tr=el('tr');vals.forEach((v,i)=>{const cell=el(i===0?'th':'td',String(v));if(i===0)cell.scope='row';tr.append(cell);});$('companies').append(tr);}}
+for(const id of ['company','from','to'])$(id).onchange=render;
+$('vendor').onchange=()=>{$('vendor-active').value=active[$('vendor').value]?'active':'inactive';};
+$('vendor-active').onchange=()=>{active[$('vendor').value]=$('vendor-active').value==='active';render();};
+$('export').onclick=()=>{const csv=[['Company','Hires','Time to fill','Offer acceptance','Retained / eligible','12-calendar-month retention','Pending'],...report].map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));const a=el('a');a.href=url;a.download='retention-insights-'+$('from').value+'-to-'+$('to').value+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};render();
+</script></body></html>
