@@ -84,16 +84,17 @@ h1,.intro h1{font-size:27px}
 .candidate .actions{margin-top:12px}
 .qualification-row{padding:10px 0}
 
+.match-number{font-size:30px;font-weight:700;color:#2459db;line-height:1.1;text-align:right}.match-number small{display:block;font-size:11px;font-weight:400}.analytics{border:1px solid var(--line);border-radius:7px;padding:14px;margin:12px 0}.metric{margin:10px 0}.metric p{font-size:12px;margin:4px 0}.metric progress{width:100%;height:9px;accent-color:#2459db}.comparison{overflow-x:auto}.comparison table{border-collapse:collapse;width:100%;font-size:12px}.comparison th,.comparison td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);min-width:110px}.comparison th:first-child{min-width:90px}.comparison caption{text-align:left;color:var(--muted);padding:8px 0}.match-alert{color:#316048;background:#edf5ef;padding:8px 12px;border-radius:5px;font-size:12px;margin:8px 0}
 </style></head><body><header><div class="brand">Team 4</div><nav class="role-navigation" aria-label="Role and page navigation"><div class="persona-chooser"><label for="persona">I'm a</label><select id="persona" aria-label="I'm a"><option value="job-seeker">Job seeker</option><option value="hiring-manager" selected>Hiring manager</option><option value="recruiter">Recruiter</option></select></div><div class="page-chooser"><label for="page-navigation">Go to</label><select id="page-navigation" aria-label="Choose a page"><option value="../job-posting/?nav=5">Job Posting</option><option value="../candidate-matches/?nav=5" selected>Candidate Matches</option><option value="../candidate-messages/?nav=5">Candidate Messages</option></select></div></nav></header><main>
 <div class="intro"><small class="eyebrow">CANDIDATE MATCHES</small><h1>Candidate Matches</h1><p class="muted">Review candidates against your job’s qualifications, including relevant abilities that a degree or job title may not reveal.</p></div>
 <section class="job-context" aria-labelledby="job-label"><label id="job-label" for="selected-job">Which job are you filling?</label><select id="selected-job"></select><p class="job-meta" id="job-meta"></p><a href="../job-posting/?nav=5">Edit job posting & qualifications</a><div id="approach-description" class="explanation"></div><details class="criteria-summary"><summary id="criteria-summary-label">Review job qualifications</summary><div id="criteria-summary"></div></details></section>
 <div class="row results-bar"><div><h2>Candidates</h2><small id="candidate-count" role="status" aria-live="polite"></small></div><div><label for="candidate-filter">Show</label><select id="candidate-filter"><option value="all">All candidates</option><option value="shortlisted">Shortlisted candidates</option></select></div></div>
 <div id="match-status" class="status" role="status" aria-live="polite"></div>
-<div id="candidate-results"></div>
+<div class="actions"><button id="compare-candidates" type="button">Compare candidates</button></div><div id="candidate-results"></div>
 <p class="field-note">Evidence indicates a possible fit, not a verified qualification. Review required criteria and outstanding questions before making a decision.</p>
 <footer style="margin-top:18px">Team 4</footer></main>
 <dialog id="candidate-detail" aria-labelledby="detail-heading"><small class="eyebrow">CANDIDATE REVIEW</small><h2 id="detail-heading"></h2><div id="detail-content"></div><div class="actions"><button id="close-detail" type="button">Back to candidates</button></div></dialog>
-<script>
+<dialog id="comparison-dialog" aria-labelledby="comparison-heading"><h2 id="comparison-heading">Candidate comparison</h2><div id="comparison-content" class="comparison"></div><div class="actions"><button id="close-comparison" type="button">Back to candidates</button></div></dialog><script>
 'use strict';
 // Add each new persona page to this navigation map on both pages.
 const personaPages={
@@ -229,12 +230,49 @@ let ids=selectedIds();const adding=!ids.includes(id);shortlist[jobKey()]=adding?
 try{localStorage.setItem('team4-candidate-shortlists',JSON.stringify(shortlist));}catch(e){}
 render();$('match-status').textContent=adding?'Candidate added to this job’s shortlist.':'Candidate removed from this job’s shortlist.';
 }
+const categories=['Skills','Experience','Knowledge'];
+function category(c){return /education|certification|knowledge|credential/i.test(c.type)?'Knowledge':/experience/i.test(c.type)?'Experience':'Skills';}
+function matchData(candidate,criteria=currentJob().criteria){
+const rows=criteria.map(c=>({criterion:c,evidence:evidenceFor(candidate,c),weight:c.level==='required'?2:1}));
+const total=rows.reduce((a,r)=>a+r.weight,0),earned=rows.reduce((a,r)=>a+(r.evidence?r.weight:0),0);
+return {rows,total,earned,score:total?Math.round(100*earned/total):null};
+}
+function percent(m){return m.score===null?'N/A':m.score+'%';}
+function summaryRows(rows,matched){return rows.filter(r=>Boolean(r.evidence)===matched).map(r=>r.criterion.name).join('; ');}
+function appendAnalytics(container,candidate){
+const m=matchData(candidate), panel=node('div',undefined,'analytics');
+panel.append(node('h3','Match breakdown'),node('p',percent(m)+' · '+m.earned+' of '+m.total+' weighted points. Required criteria count twice; preferred criteria count once.','field-note'));
+for(const name of categories){
+const data=matchData(candidate,currentJob().criteria.filter(c=>category(c)===name));
+const block=node('div',undefined,'metric'),head=node('div',undefined,'row');head.append(node('strong',name),node('strong',percent(data)));block.append(head);
+if(data.score!==null){const bar=node('progress');bar.max=100;bar.value=data.score;bar.setAttribute('aria-label',name+' match');block.append(bar);
+for(const r of data.rows)block.append(node('p',(r.evidence?'Strength: ':'Needs review: ')+r.criterion.name+' — '+(r.evidence||'No supporting evidence recorded.')));}
+else block.append(node('p','No criteria specified in this category.'));
+panel.append(block);}
+panel.append(node('p','Scores reflect reported evidence in this demo, not verified ability or hiring success. Missing evidence is not proof of a weakness.','field-note'));container.append(panel);
+}
+function showComparison(){
+const group=selectedIds().length?candidates.filter(c=>selectedIds().includes(c.id)):candidates;
+const content=$('comparison-content');content.replaceChildren(node('p',currentJob().title+' · '+(selectedIds().length?'Shortlisted candidates':'All candidates')+' · '+group.length+' candidates'));
+const table=node('table'),caption=node('caption','Weighted evidence coverage; N/A means no criteria specified.');table.append(caption);
+const head=node('thead'),hr=node('tr');for(const name of ['Metric',...group.map(c=>c.name)]){const th=node('th',name);th.scope='col';hr.append(th);}head.append(hr);table.append(head);
+const body=node('tbody');
+for(const metric of ['Overall match',...categories,'Strengths','Areas to review']){
+const tr=node('tr'),th=node('th',metric);th.scope='row';tr.append(th);
+for(const c of group){const m=matchData(c);let value=metric==='Overall match'?percent(m):categories.includes(metric)?percent(matchData(c,currentJob().criteria.filter(x=>category(x)===metric))):metric==='Strengths'?summaryRows(m.rows,true)||'No evidence recorded':summaryRows(m.rows,false)||'Validate reported evidence';tr.append(node('td',value));}body.append(tr);}
+table.append(body);content.append(table);$('comparison-dialog').showModal();
+}
+$('compare-candidates').onclick=showComparison;
+$('close-comparison').onclick=()=>$('comparison-dialog').close();
 function render(){
 jobSummary();let visible=$('candidate-filter').value==='shortlisted'?candidates.filter(c=>selectedIds().includes(c.id)):candidates;
 $('candidate-count').textContent=visible.length+' candidates · '+selectedIds().length+' shortlisted for this job';
 $('candidate-results').replaceChildren();
 for(const candidate of visible){
 const card=node('article',undefined,'candidate');card.append(node('div',candidate.label,'path-label'),node('h3',candidate.name),node('p',candidate.title+' · '+candidate.company+' · '+candidate.location,'background'));
+const m=matchData(candidate);const heading=card.querySelector('h3');const top=node('div',undefined,'row');heading.replaceWith(top);top.append(heading);const score=node('div',percent(m),'match-number');score.append(node('small','Job match'));top.append(score);
+if(m.score!==null&&m.score>=80&&m.rows.filter(r=>r.criterion.level==='required').every(r=>r.evidence)){const alert=node('div','Strong match identified · Review supporting evidence','match-alert');alert.setAttribute('role','status');card.append(alert);}
+appendAnalytics(card,candidate);
 appendEvaluationFocus(card,candidate);
 if(mode()!=='traditional'){const why=node('div',undefined,'match-story');why.append(node('strong','Why consider this candidate?'),node('span',story(candidate)));card.append(why);}
 const required=currentJob().criteria.filter(c=>c.level==='required');
@@ -248,7 +286,7 @@ if(!visible.length)$('candidate-results').append(node('p','No candidates shortli
 }
 function showCandidate(candidate){
 $('detail-heading').textContent=candidate.name;const content=$('detail-content');content.replaceChildren(node('p',candidate.title+' · '+candidate.company),node('p',candidate.experience),node('p',candidate.education));
-appendEvaluationFocus(content,candidate);
+appendAnalytics(content,candidate);appendEvaluationFocus(content,candidate);
 if(mode()!=='traditional'){const why=node('div',undefined,'match-story');why.append(node('strong','Connection to '+currentJob().title),node('span',story(candidate)));content.append(why);}
 for(const level of ['required','preferred']){
 const section=node('div',undefined,'detail-section');section.append(node('h3',level==='required'?'Required qualifications':'Preferred qualifications'));
